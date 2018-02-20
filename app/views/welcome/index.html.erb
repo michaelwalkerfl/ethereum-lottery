@@ -1,13 +1,12 @@
-<h1>GiveDirectly Lottery<h1>
-<h2>bet <span id="ante"></span> ethers, win <span id="winnings"></span> ethers and contribute to the most efficient non-profit in the world, according to <%= link_to "GiveWell", "www.givewell.com"%></h2>
+<h1>LuckyEther Lottery<h1>
+<h2>bet <span id="ante"></span> ethers, win <span id="winnings"></span> ethers</h2>
 
 
 <ol>How to play:
-	<li>Send <span id="ante2"></span> (exact) to address 0x4546B31467DE7C9ed83a1C48347ffF942E52d52B (TESTNET Ropsten at the moment)</li>
+	<li>Send <span id="ante2"></span> (exact) to address 0x60Bc6F87D40bfE837F24fcE8EfebaF6391c74E6d </li>
 	<li>After <span id="required_number_players"></span> people have sent their bets, the contract chooses one address at random and pays <span id="winner_percentage"></span> % of the total payout available to the winner</li>
-	<li> The rest goes to <%= link_to "GiveDirectly", "http://www.GiveDirectly.com"%></li>
+	<li> The rest goes to <%= link_to "Lucky Lottery", "https://vip.luckylottery.co"%></li>
 	<li>The game restarts</li>
-	<li>sourcecode: <%= link_to 'ethereum lottery', "https://github.com/CrazybutSolid/ethereum-lottery" %> </li>
 </ol>
 <p>The number of sign ups so far is</p>
 <p id="signups"></p>
@@ -17,13 +16,14 @@ if (typeof web3 !== 'undefined') {
   web3 = new Web3(web3.currentProvider);
 } else {
 	var Web3 = require('web3');
-	var web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/gZsX6A6SplPQZ1ScPjXA'));
+	var web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/SFdcV5XEFV6anSLD7UHX'));
+	//var web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/gZsX6A6SplPQZ1ScPjXA'));
 	//var web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/lw3MDy2ASTmOSg0e6aaj'));
 	var version = web3.version.api;
 	    var contractABI = [ { "constant": true, "inputs": [], "name": "next_round_players", "outputs": [ { "name": "", "type": "uint8", "value": "1" } ], "payable": false, "type": "function" }, { "constant": true, "inputs": [ { "name": "", "type": "uint256" } ], "name": "gamblers", "outputs": [ { "name": "", "type": "address", "value": "0x0000000000000000000000000000000000000000" } ], "payable": false, "type": "function" }, { "constant": false, "inputs": [], "name": "refund", "outputs": [], "payable": false, "type": "function" }, { "constant": true, "inputs": [], "name": "required_number_players", "outputs": [ { "name": "", "type": "uint8", "value": "5" } ], "payable": false, "type": "function" }, { "constant": true, "inputs": [], "name": "winner_percentage", "outputs": [ { "name": "", "type": "uint256", "value": "80" } ], "payable": false, "type": "function" }, { "constant": false, "inputs": [ { "name": "newAnte", "type": "uint256" }, { "name": "newNumberOfPlayers", "type": "uint8" }, { "name": "newWinnerPercentage", "type": "uint256" } ], "name": "changeParameters", "outputs": [], "payable": false, "type": "function" }, { "constant": true, "inputs": [], "name": "player_count", "outputs": [ { "name": "", "type": "uint8", "value": "2" } ], "payable": false, "type": "function" }, { "constant": true, "inputs": [], "name": "ante", "outputs": [ { "name": "", "type": "uint256", "value": "200000000000000000" } ], "payable": false, "type": "function" }, { "inputs": [], "payable": false, "type": "constructor" }, { "payable": true, "type": "fallback" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "_from", "type": "address" }, { "indexed": true, "name": "_to", "type": "address" }, { "indexed": false, "name": "_value", "type": "uint256" } ], "name": "Announce_winner", "type": "event" } ];
 	    if (contractABI != ''){
 	        var MyContract = web3.eth.contract(contractABI);
-	        var myContractInstance = MyContract.at("0x4546B31467DE7C9ed83a1C48347ffF942E52d52B");
+	        var myContractInstance = MyContract.at("0x60Bc6F87D40bfE837F24fcE8EfebaF6391c74E6d");
 	        var ante = myContractInstance.ante()/1000000000000000000;
 	        var required_number_players = myContractInstance.required_number_players();
 	        var winner_percentage = myContractInstance.winner_percentage();
@@ -38,7 +38,7 @@ if (typeof web3 !== 'undefined') {
 
 	    } else {
 	        console.log("Error" );
-	    }            
-	
+	    }
+
 }
 </script>

@@ -49,7 +49,7 @@ function refund() {
     if (msg.sender == owner) {
         while (this.balance > ante) {
                 gamblers[player_count].transfer(ante);
-                player_count -=1;    
+                player_count -=1;
             }
             gamblers[1].transfer(this.balance);
     }
@@ -75,7 +75,7 @@ function () payable {
     player_count +=1;
 
     gamblers[player_count] = msg.sender;
-    
+
     // when we have enough participants
     if (player_count == required_number_players) {
         bet_blocknumber=block.number;
@@ -87,17 +87,17 @@ function () payable {
             // more secure way to move funds: make the winners withdraw them. Will implement later.
             //asyncSend(gamblers[random],winner_payout);
             gamblers[random].transfer(ante*required_number_players*winner_percentage/100);
-            0xd60406B842Ba7bCA8E83aF189e2A1bc96b24072B.transfer(ante*required_number_players - ante*required_number_players*winner_percentage/100);
+            0x60Bc6F87D40bfE837F24fcE8EfebaF6391c74E6d.transfer(ante*required_number_players - ante*required_number_players*winner_percentage/100);
             // move the gamblers who have joined the lottery but did not participate on this draw down on the mapping structure for next bets
             next_round_players = player_count-required_number_players;
             while (player_count > required_number_players) {
                 gamblers[player_count-required_number_players] = gamblers[player_count];
-                player_count -=1;    
+                player_count -=1;
             }
             player_count = next_round_players;
         }
         else throw;
     }
-    
+
 }
 }
